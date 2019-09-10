@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Train Scheduler</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .table th {
+            border-top: none;
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <div class="jumbotron jumbotron-fluid mx-auto" style="width: 80%;">
+        <div class="container">
+            <h1 class="display-5 text-center">Train Scheduler</h1>
+        </div>
+    </div>
+
+    <div class="card mx-auto mb-4" style="width: 80%;">
+        <div class="card-header bg-info text-white">
+            Current Train Schedule
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Train Name</th>
+                        <th scope="col">Destination</th>
+                        <th scope="col">Frequency (min)</th>
+                        <th scope="col">Next Arrival</th>
+                        <th scope="col">Minutes Away</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                    </tr>
+                    <tr>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>@fat</td>
+                    </tr>
+                    <tr>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>@twitter</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <div class="card mx-auto" style="width: 80%;">
+        <div class="card-header bg-info text-white">
+            Add Train
+        </div>
+        <div class="card-body">
+            <form>
+                <div class="form-group">
+                    <label for="trainName" class="h6">Train Name</label>
+                    <input type="text" class="form-control" id="trainName">
+                </div>
+                <div class="form-group">
+                    <label for="destination" class="h6">Destination</label>
+                    <input type="text" class="form-control" id="destination">
+                </div>
+                <div class="form-group">
+                    <label for="firstTrainTime" class="h6">First Train Time (HH:mm - military time)</label>
+                    <input type="text" class="form-control" id="firstTrainTime">
+                </div>
+                <div class="form-group">
+                    <label for="frequency" class="h6">Frequency (min)</label>
+                    <input type="text" class="form-control" id="frequency">
+                </div>
+
+                <button type="submit" class="btn btn-info">Submit</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>
