@@ -14,7 +14,8 @@ $(document).ready(function () {
 
     var database = firebase.database();
 
-    var trainListRef = database.ref('trainList');
+    var trainListRef = database.ref('/trainList');
+
 
     $("#add-train").on("click", function (event) {
 
@@ -25,9 +26,7 @@ $(document).ready(function () {
         var firstTrainTime = $("#firstTrainTime").val().trim();
         var frequency = $("#frequency").val().trim();
 
-        var newTrainRef = trainListRef.push();
-
-        newTrainRef.set({
+        trainListRef.push({
             trainName: trainName,
             destination: destination,
             firstTrainTime: firstTrainTime,
@@ -42,29 +41,35 @@ $(document).ready(function () {
     });
 
 
-    trainListRef.on("value", function (snapshot) {
+    trainListRef.on("child_added", function (snapshot) {
 
-        snapshot.forEach(function (childSnapshot) {
+        var trEle = $("<tr>");
+        var trainTdEle = $("<td>" + snapshot.val().trainName + "</td>");
+        var destinationTdEle = $("<td>" + snapshot.val().destination + "</td>");
+        var frequencyTdEle = $("<td>" + snapshot.val().frequency + "</td>");
 
-            var trEle = $("<tr>");
 
-            var trainTdEle = $("<td>" + childSnapshot.val().trainName + "</td>");
-            var destinationTdEle = $("<td>" + childSnapshot.val().destination + "</td>");
-            var frequencyTdEle = $("<td>" + childSnapshot.val().frequency + "</td>");
+        var now = moment();
+        var nextArrival = moment(snapshot.val().firstTrainTime, "HH:mm");
 
-            trEle.append(trainTdEle, destinationTdEle, frequencyTdEle);
+        while (nextArrival.isBefore(now)) {
+            nextArrival.add(parseInt(snapshot.val().frequency), "m");
+        }
 
-            $("tbody").append(trEle);
+        var minutesAway = nextArrival.diff(now, "minutes");
 
-        });
+
+        var nextArrivalTdEle = $("<td>" + nextArrival.format("LT") + "</td>");
+        var minutesAwayTdEle = $("<td>" + minutesAway + "</td>");
+
+        trEle.append(trainTdEle, destinationTdEle, frequencyTdEle, nextArrivalTdEle, minutesAwayTdEle);
+
+        $("tbody").append(trEle);
 
     },
 
         function (errorObject) {
             console.log("error: " + errorObject.code);
         });
-
-
-
 
 });
